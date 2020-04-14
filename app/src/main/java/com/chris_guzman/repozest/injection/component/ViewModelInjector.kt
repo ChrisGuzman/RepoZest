@@ -1,6 +1,7 @@
 package com.chris_guzman.repozest.injection.component
 
 import com.chris_guzman.repozest.injection.NetworkModule
+import com.chris_guzman.repozest.ui.organization.OrgListViewModel
 import com.chris_guzman.repozest.ui.repo.RepoListViewModel
 import dagger.Component
 import javax.inject.Singleton
@@ -9,6 +10,7 @@ import javax.inject.Singleton
 @Component(modules = [(NetworkModule::class)])
 interface ViewModelInjector {
     fun inject(repoListViewModel: RepoListViewModel)
+    fun inject(orgListViewModel: OrgListViewModel)
 
     @Component.Builder
     interface Builder{

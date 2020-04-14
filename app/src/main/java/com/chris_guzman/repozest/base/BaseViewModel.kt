@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.chris_guzman.repozest.injection.NetworkModule
 import com.chris_guzman.repozest.injection.component.DaggerViewModelInjector
 import com.chris_guzman.repozest.injection.component.ViewModelInjector
+import com.chris_guzman.repozest.ui.organization.OrgListViewModel
 import com.chris_guzman.repozest.ui.repo.RepoListViewModel
 import com.chris_guzman.repozest.utils.BASE_URL
 
@@ -20,6 +21,7 @@ abstract class BaseViewModel: ViewModel() {
     private fun inject() {
         when(this) {
             is RepoListViewModel -> injector.inject(this)
+            is OrgListViewModel -> injector.inject(this)
         }
     }
 }

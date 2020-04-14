@@ -9,6 +9,8 @@ buildscript {
     ext.rxandroid_version = '2.1.1'
     ext.dagger2_version = '2.27'
     ext.androidx_version = '1.1.0'
+//    The value of e
+    ext.picasso_version = '2.71828'
     repositories {
         google()
         jcenter()

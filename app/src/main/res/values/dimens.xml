@@ -2,4 +2,6 @@
 <resources>
     <dimen name="repository_item_padding">16dp</dimen>
     <dimen name="repository_item_margin">8dp</dimen>
+    <dimen name="org_list_margin">8dp</dimen>
+    <dimen name="organization_item_padding">16dp</dimen>
 </resources>
