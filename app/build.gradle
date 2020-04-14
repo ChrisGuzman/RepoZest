@@ -10,7 +10,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    
+
     kotlinOptions {
         jvmTarget = "1.8"
     }
@@ -42,7 +42,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "androidx.appcompat:appcompat:$constraintlayout_version"
+    implementation "androidx.appcompat:appcompat:$androidx_version"
     implementation 'androidx.core:core-ktx:1.2.0'
 
     //LiveData and ViewModel
@@ -64,8 +64,9 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$dagger2_version"
 
     //UI
-    implementation "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
-    implementation "androidx.recyclerview:recyclerview:$constraintlayout_version"
+    implementation "androidx.constraintlayout:constraintlayout:$androidx_version"
+    implementation "androidx.recyclerview:recyclerview:$androidx_version"
+    implementation "com.google.android.material:material:$androidx_version"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
