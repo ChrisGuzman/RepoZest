@@ -7,7 +7,6 @@ import com.chris_guzman.repozest.R
 import com.chris_guzman.repozest.base.BaseViewModel
 import com.chris_guzman.repozest.model.SearchRepoResponse
 import com.chris_guzman.repozest.network.GitHubApi
-import com.google.android.material.snackbar.Snackbar
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -21,6 +20,7 @@ class RepoListViewModel: BaseViewModel() {
     val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
     val errorMessage: MutableLiveData<Int> = MutableLiveData()
     val errorClickListener = View.OnClickListener { loadRepos() }
+    val repoListAdapter: RepoListAdapter = RepoListAdapter()
 
     init {
         loadRepos()
@@ -43,21 +43,22 @@ class RepoListViewModel: BaseViewModel() {
             )
     }
 
-    private fun onRetrieveRepoListError(error: Throwable) {
-        Log.e("GUZ", "error", error)
-        errorMessage.value = R.string.repo_list_retrieve_error
-    }
-
-    private fun onRetrieveRepoListSuccess(response: SearchRepoResponse) {
-        Log.d("GUZ", "$response")
+    private fun onRetrieveRepoListStart() {
+        loadingVisibility.value = View.VISIBLE
+        errorMessage.value = null
     }
 
     private fun onRetrieveRepoListFinish() {
         loadingVisibility.value = View.GONE
     }
 
-    private fun onRetrieveRepoListStart() {
-        loadingVisibility.value = View.VISIBLE
-        errorMessage.value = null
+    private fun onRetrieveRepoListSuccess(response: SearchRepoResponse) {
+        repoListAdapter.updateRepoList(response.items)
     }
+
+    private fun onRetrieveRepoListError(error: Throwable) {
+        Log.e("GUZ", "error", error)
+        errorMessage.value = R.string.repo_list_retrieve_error
+    }
+
 }
