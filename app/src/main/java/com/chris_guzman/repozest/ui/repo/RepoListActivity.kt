@@ -9,20 +9,34 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chris_guzman.repozest.R
 import com.chris_guzman.repozest.databinding.ActivityRepoListBinding
+import com.chris_guzman.repozest.ui.organization.EXTRA_ORG_NAME
 import com.google.android.material.snackbar.Snackbar
 
-class RepoListActivity : AppCompatActivity() {
+class RepoListActivity : AppCompatActivity(), RepoCallBack {
     private lateinit var binding: ActivityRepoListBinding
     private lateinit var viewModel: RepoListViewModel
+    private lateinit var repoListAdapter: RepoListAdapter
+
     private var errorSnackbar: Snackbar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val orgName = intent.getStringExtra(EXTRA_ORG_NAME)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_repo_list)
-        binding.repoList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         viewModel = ViewModelProvider(this).get(RepoListViewModel::class.java)
+        viewModel.orgName = orgName
+
+        repoListAdapter = RepoListAdapter(this)
+
+        binding.repoList.adapter = repoListAdapter
+        binding.repoList.layoutManager = LinearLayoutManager(this)
+
+        viewModel.repositories.observe(this, Observer {
+            repoListAdapter.updateRepoList(it)
+        })
+
         viewModel.errorMessage.observe(this, Observer {
             errorMessage -> if (errorMessage != null) {
                 showError(errorMessage)
@@ -31,6 +45,7 @@ class RepoListActivity : AppCompatActivity() {
             }
         })
         binding.viewModel = viewModel
+        viewModel.loadRepos()
     }
 
     private fun hideError() {
@@ -41,5 +56,9 @@ class RepoListActivity : AppCompatActivity() {
         errorSnackbar = Snackbar.make(binding.root, errorMessage, Snackbar.LENGTH_INDEFINITE)
         errorSnackbar?.setAction(R.string.retry, viewModel.errorClickListener)
         errorSnackbar?.show()
+    }
+
+    override fun onClick(url: String) {
+        TODO("Not yet implemented")
     }
 }

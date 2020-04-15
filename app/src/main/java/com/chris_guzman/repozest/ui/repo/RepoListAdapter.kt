@@ -8,12 +8,13 @@ import com.chris_guzman.repozest.R
 import com.chris_guzman.repozest.databinding.ItemRepositoryBinding
 import com.chris_guzman.repozest.model.Repository
 
-class RepoListAdapter: RecyclerView.Adapter<RepoListAdapter.ViewHolder>() {
+class RepoListAdapter(private val callback: RepoCallBack) : RecyclerView.Adapter<RepoListAdapter.ViewHolder>() {
     // Can this not be lateinit?
     private lateinit var repoList: List<Repository>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: ItemRepositoryBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_repository, parent, false)
+        binding.callback = callback
         return ViewHolder(binding)
     }
 

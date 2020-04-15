@@ -8,11 +8,14 @@ import com.chris_guzman.repozest.R
 import com.chris_guzman.repozest.databinding.ItemOrganizationBinding
 import com.chris_guzman.repozest.model.Organization
 
-class OrgListAdapter: RecyclerView.Adapter<OrgListAdapter.ViewHolder>() {
+class OrgListAdapter(
+    private val callback: OrgCallBack
+) : RecyclerView.Adapter<OrgListAdapter.ViewHolder>() {
     private lateinit var orgList: List<Organization>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: ItemOrganizationBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_organization, parent, false)
+        binding.callback = callback
         return ViewHolder(binding)
     }
 

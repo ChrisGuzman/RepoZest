@@ -1,7 +1,7 @@
 package com.chris_guzman.repozest.ui.organization
 
+import android.content.Intent
 import android.os.Bundle
-import android.widget.LinearLayout
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -10,11 +10,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chris_guzman.repozest.R
 import com.chris_guzman.repozest.databinding.ActivityOrganizationListBinding
+import com.chris_guzman.repozest.ui.repo.RepoListActivity
 import com.google.android.material.snackbar.Snackbar
 
-class OrgListActivity: AppCompatActivity() {
+const val EXTRA_ORG_NAME = "extra_org_name"
+class OrgListActivity: AppCompatActivity(), OrgCallBack {
     private lateinit var binding: ActivityOrganizationListBinding
     private lateinit var viewModel: OrgListViewModel
+    private lateinit var orgListAdapter: OrgListAdapter
 
     private var errorSnackbar: Snackbar? = null
 
@@ -22,9 +25,16 @@ class OrgListActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_organization_list)
-        binding.orgList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-
         viewModel = ViewModelProvider(this).get(OrgListViewModel::class.java)
+
+        orgListAdapter = OrgListAdapter(this)
+        binding.orgList.adapter = orgListAdapter
+        binding.orgList.layoutManager = LinearLayoutManager(this)
+
+        viewModel.organizations.observe(this, Observer {
+            orgListAdapter.updateOrgList(it)
+        })
+
         viewModel.errorMessage.observe(this, Observer {
             if (it != null) {
                 showError(it)
@@ -32,6 +42,7 @@ class OrgListActivity: AppCompatActivity() {
                 hideError()
             }
         })
+
         binding.viewModel = viewModel
     }
 
@@ -43,5 +54,11 @@ class OrgListActivity: AppCompatActivity() {
 
     private fun hideError() {
         errorSnackbar?.dismiss()
+    }
+
+    override fun onClick(orgName: String) {
+        startActivity(Intent(this, RepoListActivity::class.java).apply {
+            putExtra(EXTRA_ORG_NAME, orgName)
+        })
     }
 }

@@ -6,6 +6,10 @@
         <variable
             name="viewModel"
             type="com.chris_guzman.repozest.ui.repo.RepoViewModel" />
+
+        <variable
+            name="callback"
+            type="com.chris_guzman.repozest.ui.repo.RepoCallBack" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,7 +17,8 @@
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/repository_item_padding"
         android:paddingStart="@dimen/repository_item_padding"
-        android:paddingEnd="@dimen/repository_item_padding">
+        android:paddingEnd="@dimen/repository_item_padding"
+        android:onClick="@{() -> callback.onClick(viewModel.url)}">
 
         <TextView
             android:id="@+id/repo_title"

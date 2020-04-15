@@ -28,11 +28,6 @@ fun setMutableText(view: TextView, text: MutableLiveData<String>?) {
     }
 }
 
-@BindingAdapter("adapter")
-fun setAdapter(view: RecyclerView, adapter: RecyclerView.Adapter<*>) {
-    view.adapter = adapter
-}
-
 @BindingAdapter("imageUrl")
 fun setMutableImageUrl(view: ImageView, url: MutableLiveData<String>?) {
     Picasso.get().load(url?.value)

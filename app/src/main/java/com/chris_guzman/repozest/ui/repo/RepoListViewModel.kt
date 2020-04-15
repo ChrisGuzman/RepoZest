@@ -4,7 +4,10 @@ import android.util.Log
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import com.chris_guzman.repozest.R
+import com.chris_guzman.repozest.base.BaseListViewModel
 import com.chris_guzman.repozest.base.BaseViewModel
+import com.chris_guzman.repozest.model.Organization
+import com.chris_guzman.repozest.model.Repository
 import com.chris_guzman.repozest.model.SearchRepoResponse
 import com.chris_guzman.repozest.network.GitHubApi
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -12,53 +15,32 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class RepoListViewModel: BaseViewModel() {
-    @Inject
-    lateinit var gitHubApi: GitHubApi
+class RepoListViewModel: BaseListViewModel() {
 
-    private lateinit var subscription: Disposable
-    val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
-    val errorMessage: MutableLiveData<Int> = MutableLiveData()
+    var orgName: String? = null
     val errorClickListener = View.OnClickListener { loadRepos() }
-    val repoListAdapter: RepoListAdapter = RepoListAdapter()
+    val repositories: MutableLiveData<List<Repository>> = MutableLiveData()
 
-    init {
-        loadRepos()
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        subscription.dispose()
-    }
-
-    private fun loadRepos() {
-        subscription = gitHubApi.getRepos(query = "org:nytimes")
+    fun loadRepos() {
+        val query = if (orgName.isNullOrEmpty()) "org:nytimes" else "org:$orgName"
+        subscriptions.add( gitHubApi.getRepos(query = query)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe { onRetrieveRepoListStart() }
-            .doOnTerminate { onRetrieveRepoListFinish() }
+            .doOnSubscribe { onRetrieveStart() }
+            .doOnTerminate { onRetrieveFinish() }
             .subscribe(
                 {onRetrieveRepoListSuccess(it)},
-                {onRetrieveRepoListError(it)}
-            )
-    }
-
-    private fun onRetrieveRepoListStart() {
-        loadingVisibility.value = View.VISIBLE
-        errorMessage.value = null
-    }
-
-    private fun onRetrieveRepoListFinish() {
-        loadingVisibility.value = View.GONE
+                {onRetrieveError(it)}
+            ))
     }
 
     private fun onRetrieveRepoListSuccess(response: SearchRepoResponse) {
-        repoListAdapter.updateRepoList(response.items)
+        Log.d("GUZ", "$response")
+        repositories.value = response.items
     }
 
-    private fun onRetrieveRepoListError(error: Throwable) {
-        Log.e("GUZ", "error", error)
+    override fun onRetrieveError(error: Throwable) {
+        super.onRetrieveError(error)
         errorMessage.value = R.string.repo_list_retrieve_error
     }
-
 }

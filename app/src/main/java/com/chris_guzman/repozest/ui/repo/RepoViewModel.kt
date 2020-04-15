@@ -9,9 +9,12 @@ class RepoViewModel: BaseViewModel() {
         private set
     var description = MutableLiveData<String>()
         private set
+    var url = MutableLiveData<String>()
+        private set
 
     fun bind(repository: Repository) {
         name.value = repository.name
         description.value = repository.description
+        url.value = repository.html_url
     }
 }

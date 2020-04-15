@@ -7,13 +7,19 @@
         <variable
             name="viewModel"
             type="com.chris_guzman.repozest.ui.organization.OrgViewModel" />
+        
+        <variable
+            name="callback"
+            type="com.chris_guzman.repozest.ui.organization.OrgCallBack" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/org_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingStart="@dimen/organization_item_padding"
         android:paddingEnd="@dimen/organization_item_padding"
+        android:onClick="@{() -> callback.onClick(viewModel.name)}"
         >
 
         <ImageView
