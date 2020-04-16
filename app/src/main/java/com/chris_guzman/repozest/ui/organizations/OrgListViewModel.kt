@@ -15,7 +15,7 @@ class OrgListViewModel: BaseListViewModel<Organization>() {
         loadOrgs()
     }
 
-    private fun loadOrgs(search: String? = null) {
+    fun loadOrgs(search: String? = null) {
         subscriptions.add( gitHubApiClient.getOrganizations(search)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

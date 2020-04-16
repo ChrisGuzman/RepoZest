@@ -2,6 +2,7 @@ package com.chris_guzman.repozest.ui.organizations
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -12,6 +13,12 @@ import com.chris_guzman.repozest.R
 import com.chris_guzman.repozest.databinding.ActivityOrganizationListBinding
 import com.chris_guzman.repozest.ui.repositories.RepoListActivity
 import com.google.android.material.snackbar.Snackbar
+import com.jakewharton.rxbinding3.widget.afterTextChangeEvents
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import java.util.concurrent.TimeUnit
+
 
 const val EXTRA_ORG_NAME = "extra_org_name"
 class OrgListActivity: AppCompatActivity(), OrgCallBack {
@@ -20,6 +27,7 @@ class OrgListActivity: AppCompatActivity(), OrgCallBack {
     private lateinit var orgListAdapter: OrgListAdapter
 
     private var errorSnackbar: Snackbar? = null
+    var subscriptions = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,7 +51,27 @@ class OrgListActivity: AppCompatActivity(), OrgCallBack {
             }
         })
 
+        subscriptions.add( binding.orgSearch.afterTextChangeEvents()
+            .debounce(500, TimeUnit.MILLISECONDS)
+            .map { it.editable.toString().trim() }
+            .filter { it.isNotEmpty() }
+            .distinctUntilChanged()
+            .switchMap { s -> Observable.just(s) }
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                {
+                    Log.d("GUZ", "search $it")
+                    viewModel.loadOrgs(it) },
+                { Log.e("GUZ", "error", it)}
+            )
+        )
+
         binding.viewModel = viewModel
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        subscriptions.dispose()
     }
 
     private fun showError(@StringRes errorMessage: Int) {

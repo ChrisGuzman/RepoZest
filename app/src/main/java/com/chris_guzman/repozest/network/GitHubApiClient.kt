@@ -1,5 +1,6 @@
 package com.chris_guzman.repozest.network
 
+import android.util.Log
 import com.chris_guzman.repozest.model.GitHubResponse
 import com.chris_guzman.repozest.model.Organization
 import com.chris_guzman.repozest.model.Repository
@@ -16,11 +17,12 @@ class GitHubApiClient @Inject constructor(private val gitHubApi: GitHubApi) {
 
     // /search/users?q={name}+in%3Alogin+type:org
     fun getOrganizations(search: String? = null): Observable<GitHubResponse<Organization>> {
-        val query = if (search == null) {
+        val query = if (search.isNullOrEmpty()) {
             "type:org"
         } else {
-            "$search+in%3Alogin+type:org"
+            "$search+in:login+type:org"
         }
+        Log.d("GUZ", "query $query")
         return gitHubApi.getOrganizations(query)
     }
 }
