@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.chris_guzman.repozest.ui.repo.RepoListViewModel" />
+            type="com.chris_guzman.repozest.ui.repositories.RepoListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

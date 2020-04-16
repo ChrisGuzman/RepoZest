@@ -6,11 +6,11 @@
     <data>
         <variable
             name="viewModel"
-            type="com.chris_guzman.repozest.ui.organization.OrgViewModel" />
+            type="com.chris_guzman.repozest.ui.organizations.OrgViewModel" />
         
         <variable
             name="callback"
-            type="com.chris_guzman.repozest.ui.organization.OrgCallBack" />
+            type="com.chris_guzman.repozest.ui.organizations.OrgCallBack" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -1,15 +1,17 @@
-package com.chris_guzman.repozest.ui.repo
+package com.chris_guzman.repozest.ui.repositories
 
+import android.net.Uri
 import android.os.Bundle
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chris_guzman.repozest.R
 import com.chris_guzman.repozest.databinding.ActivityRepoListBinding
-import com.chris_guzman.repozest.ui.organization.EXTRA_ORG_NAME
+import com.chris_guzman.repozest.ui.organizations.EXTRA_ORG_NAME
 import com.google.android.material.snackbar.Snackbar
 
 class RepoListActivity : AppCompatActivity(), RepoCallBack {
@@ -33,7 +35,7 @@ class RepoListActivity : AppCompatActivity(), RepoCallBack {
         binding.repoList.adapter = repoListAdapter
         binding.repoList.layoutManager = LinearLayoutManager(this)
 
-        viewModel.repositories.observe(this, Observer {
+        viewModel.data.observe(this, Observer {
             repoListAdapter.updateRepoList(it)
         })
 
@@ -59,6 +61,7 @@ class RepoListActivity : AppCompatActivity(), RepoCallBack {
     }
 
     override fun onClick(url: String) {
-        TODO("Not yet implemented")
+        val customtab = CustomTabsIntent.Builder().build()
+        customtab.launchUrl(this, Uri.parse(url))
     }
 }

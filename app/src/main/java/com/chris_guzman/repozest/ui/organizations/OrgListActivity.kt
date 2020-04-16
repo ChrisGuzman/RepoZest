@@ -1,4 +1,4 @@
-package com.chris_guzman.repozest.ui.organization
+package com.chris_guzman.repozest.ui.organizations
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chris_guzman.repozest.R
 import com.chris_guzman.repozest.databinding.ActivityOrganizationListBinding
-import com.chris_guzman.repozest.ui.repo.RepoListActivity
+import com.chris_guzman.repozest.ui.repositories.RepoListActivity
 import com.google.android.material.snackbar.Snackbar
 
 const val EXTRA_ORG_NAME = "extra_org_name"
@@ -31,7 +31,7 @@ class OrgListActivity: AppCompatActivity(), OrgCallBack {
         binding.orgList.adapter = orgListAdapter
         binding.orgList.layoutManager = LinearLayoutManager(this)
 
-        viewModel.organizations.observe(this, Observer {
+        viewModel.data.observe(this, Observer {
             orgListAdapter.updateOrgList(it)
         })
 

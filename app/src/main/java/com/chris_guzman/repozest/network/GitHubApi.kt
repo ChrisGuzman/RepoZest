@@ -1,15 +1,16 @@
 package com.chris_guzman.repozest.network
 
-import com.chris_guzman.repozest.model.SearchOrgResponse
-import com.chris_guzman.repozest.model.SearchRepoResponse
+import com.chris_guzman.repozest.model.GitHubResponse
+import com.chris_guzman.repozest.model.Organization
+import com.chris_guzman.repozest.model.Repository
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface GitHubApi {
     @GET("/search/repositories")
-    fun getRepos(@Query("q") query: String, @Query("sort") sort: String = "stars"): Observable<SearchRepoResponse>
+    fun getRepos(@Query("q") query: String, @Query("sort") sort: String = "stars"): Observable<GitHubResponse<Repository>>
     // /search/users?q={name}+in%3Alogin+type:org
     @GET("/search/users")
-    fun getOrganizations(@Query("q") query: String, @Query("sort") sort: String = "repositories"): Observable<SearchOrgResponse>
+    fun getOrganizations(@Query("q") query: String, @Query("sort") sort: String = "repositories"): Observable<GitHubResponse<Organization>>
 }

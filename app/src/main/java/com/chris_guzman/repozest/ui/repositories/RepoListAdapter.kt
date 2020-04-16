@@ -1,4 +1,4 @@
-package com.chris_guzman.repozest.ui.repo
+package com.chris_guzman.repozest.ui.repositories
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

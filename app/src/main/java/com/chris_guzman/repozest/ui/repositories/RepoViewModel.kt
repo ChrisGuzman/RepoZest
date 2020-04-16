@@ -1,4 +1,4 @@
-package com.chris_guzman.repozest.ui.repo
+package com.chris_guzman.repozest.ui.repositories
 
 import androidx.lifecycle.MutableLiveData
 import com.chris_guzman.repozest.base.BaseViewModel

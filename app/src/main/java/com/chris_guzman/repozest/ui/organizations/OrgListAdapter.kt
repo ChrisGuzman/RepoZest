@@ -1,4 +1,4 @@
-package com.chris_guzman.repozest.ui.organization
+package com.chris_guzman.repozest.ui.organizations
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

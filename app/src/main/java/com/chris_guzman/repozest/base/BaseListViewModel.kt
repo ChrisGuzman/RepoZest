@@ -4,19 +4,23 @@ import android.telephony.euicc.DownloadableSubscription
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.MutableLiveData
+import com.chris_guzman.repozest.model.GitHubResponse
+import com.chris_guzman.repozest.model.Repository
 import com.chris_guzman.repozest.network.GitHubApi
+import com.chris_guzman.repozest.network.GitHubApiClient
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
-abstract class BaseListViewModel: BaseViewModel() {
+abstract class BaseListViewModel<T>: BaseViewModel() {
     @Inject
-    lateinit var gitHubApi: GitHubApi
+    lateinit var gitHubApiClient: GitHubApiClient
 
     var subscriptions = CompositeDisposable()
 
     val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
     val errorMessage: MutableLiveData<Int> = MutableLiveData()
+    val data: MutableLiveData<List<T>> = MutableLiveData()
 
     override fun onCleared() {
         super.onCleared()
@@ -34,5 +38,9 @@ abstract class BaseListViewModel: BaseViewModel() {
 
     open fun onRetrieveError(error: Throwable) {
         Log.e("GUZ", "error", error)
+    }
+
+    fun onRetrieveSuccess(gitHubResponse: GitHubResponse<T>) {
+        data.value = gitHubResponse.items
     }
 }

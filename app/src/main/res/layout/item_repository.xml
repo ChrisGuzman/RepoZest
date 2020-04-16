@@ -5,11 +5,11 @@
     <data>
         <variable
             name="viewModel"
-            type="com.chris_guzman.repozest.ui.repo.RepoViewModel" />
+            type="com.chris_guzman.repozest.ui.repositories.RepoViewModel" />
 
         <variable
             name="callback"
-            type="com.chris_guzman.repozest.ui.repo.RepoCallBack" />
+            type="com.chris_guzman.repozest.ui.repositories.RepoCallBack" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

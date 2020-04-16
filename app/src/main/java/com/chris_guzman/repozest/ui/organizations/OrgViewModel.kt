@@ -1,4 +1,4 @@
-package com.chris_guzman.repozest.ui.organization
+package com.chris_guzman.repozest.ui.organizations
 
 import androidx.lifecycle.MutableLiveData
 import com.chris_guzman.repozest.base.BaseViewModel

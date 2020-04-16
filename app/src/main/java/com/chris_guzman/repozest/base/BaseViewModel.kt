@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import com.chris_guzman.repozest.injection.NetworkModule
 import com.chris_guzman.repozest.injection.component.DaggerViewModelInjector
 import com.chris_guzman.repozest.injection.component.ViewModelInjector
-import com.chris_guzman.repozest.ui.organization.OrgListViewModel
-import com.chris_guzman.repozest.ui.repo.RepoListViewModel
+import com.chris_guzman.repozest.ui.organizations.OrgListViewModel
+import com.chris_guzman.repozest.ui.repositories.RepoListViewModel
 import com.chris_guzman.repozest.utils.BASE_URL
 
 abstract class BaseViewModel: ViewModel() {
