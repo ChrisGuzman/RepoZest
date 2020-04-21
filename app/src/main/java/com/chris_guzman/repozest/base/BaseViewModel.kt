@@ -6,12 +6,11 @@ import com.chris_guzman.repozest.injection.component.DaggerViewModelInjector
 import com.chris_guzman.repozest.injection.component.ViewModelInjector
 import com.chris_guzman.repozest.ui.organizations.OrgListViewModel
 import com.chris_guzman.repozest.ui.repositories.RepoListViewModel
-import com.chris_guzman.repozest.utils.BASE_URL
 
 abstract class BaseViewModel: ViewModel() {
     private val injector: ViewModelInjector = DaggerViewModelInjector
         .builder()
-        .networkModule(NetworkModule(BASE_URL))
+        .networkModule(NetworkModule())
         .build()
 
     init {

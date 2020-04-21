@@ -5,7 +5,6 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 
 // https://stackoverflow.com/a/32973351
-// TODO Maybe don't get parent activity from view?
 fun View.getParentActivity(): AppCompatActivity? {
     var context = this.context
     while (context is ContextWrapper) {

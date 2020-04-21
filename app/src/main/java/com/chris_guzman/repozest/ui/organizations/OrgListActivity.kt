@@ -59,10 +59,8 @@ class OrgListActivity: AppCompatActivity(), OrgCallBack {
             .switchMap { s -> Observable.just(s) }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
-                {
-                    Log.d("GUZ", "search $it")
-                    viewModel.loadOrgs(it) },
-                { Log.e("GUZ", "error", it)}
+                { viewModel.loadOrgs(it) },
+                { Log.e("GUZ", "Error searching orgs", it)}
             )
         )
 

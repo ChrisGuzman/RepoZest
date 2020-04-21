@@ -1,5 +1,6 @@
 package com.chris_guzman.repozest.injection
 
+import com.chris_guzman.repozest.BuildConfig
 import com.chris_guzman.repozest.network.GitHubApi
 import dagger.Module
 import dagger.Provides
@@ -13,7 +14,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 
 @Module
-class NetworkModule(private val baseUri: String) {
+class NetworkModule {
 
     @Provides
     @Reusable
@@ -30,7 +31,7 @@ class NetworkModule(private val baseUri: String) {
         httpClient.addInterceptor(logging)
 
         return Retrofit.Builder()
-            .baseUrl(baseUri)
+            .baseUrl(BuildConfig.API_URL)
             .addConverterFactory(MoshiConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
             .client(httpClient.build())

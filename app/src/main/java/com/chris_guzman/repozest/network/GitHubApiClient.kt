@@ -22,7 +22,6 @@ class GitHubApiClient @Inject constructor(private val gitHubApi: GitHubApi) {
         } else {
             "$search+in:login+type:org"
         }
-        Log.d("GUZ", "query $query")
         return gitHubApi.getOrganizations(query)
     }
 }
