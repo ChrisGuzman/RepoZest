@@ -17,8 +17,7 @@
         android:id="@+id/org_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="@dimen/organization_item_padding"
-        android:paddingEnd="@dimen/organization_item_padding"
+        android:padding="@dimen/organization_item_padding"
         android:onClick="@{() -> callback.onClick(viewModel.name)}"
         >
 

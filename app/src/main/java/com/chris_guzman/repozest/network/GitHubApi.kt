@@ -10,7 +10,7 @@ import retrofit2.http.Query
 interface GitHubApi {
     @GET("/search/repositories")
     fun getRepos(@Query("q") query: String, @Query("sort") sort: String = "stars"): Observable<GitHubResponse<Repository>>
-    // /search/users?q={name}+in%3Alogin+type:org
+
     @GET("/search/users")
-    fun getOrganizations(@Query(value = "q", encoded = true) query: String, @Query("sort") sort: String = "repositories"): Observable<GitHubResponse<Organization>>
+    fun getOrganizations(@Query(value = "q", encoded = true) query: String): Observable<GitHubResponse<Organization>>
 }

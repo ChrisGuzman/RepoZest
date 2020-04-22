@@ -11,13 +11,13 @@ class RepoViewModel: BaseViewModel() {
         private set
     var url = MutableLiveData<String>()
         private set
-    var stars = MutableLiveData<String>()
+    var stars = MutableLiveData<Int>()
         private set
 
     fun bind(repository: Repository) {
         name.value = repository.name
         description.value = repository.description
         url.value = repository.html_url
-        stars.value = repository.stargazers_count.toString()
+        stars.value = repository.stargazers_count
     }
 }

@@ -39,6 +39,7 @@ class OrgListAdapter(
         fun bind(organization: Organization) {
             viewModel.bind(organization)
             binding.viewModel = viewModel
+            binding.executePendingBindings()
         }
     }
 }

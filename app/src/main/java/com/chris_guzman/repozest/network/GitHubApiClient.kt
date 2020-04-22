@@ -22,7 +22,6 @@ class GitHubApiClient {
         return gitHubApi.getRepos("org:$orgName")
     }
 
-    // /search/users?q={name}+in%3Alogin+type:org
     fun getOrganizations(search: String? = null): Observable<GitHubResponse<Organization>> {
         val query = if (search.isNullOrEmpty()) {
             "type:org"
