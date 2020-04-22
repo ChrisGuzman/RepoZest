@@ -1,4 +1,4 @@
-package com.chris_guzman.repozest.ui.repositories
+package com.chris_guzman.repozest.ui.repositories.view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,10 +7,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.chris_guzman.repozest.R
 import com.chris_guzman.repozest.databinding.ItemRepositoryBinding
 import com.chris_guzman.repozest.model.Repository
+import com.chris_guzman.repozest.ui.repositories.viewmodel.RepoCallBack
+import com.chris_guzman.repozest.ui.repositories.viewmodel.RepoViewModel
 
 class RepoListAdapter(private val callback: RepoCallBack) : RecyclerView.Adapter<RepoListAdapter.ViewHolder>() {
-    // Can this not be lateinit?
-    private lateinit var repoList: List<Repository>
+    private var repoList: List<Repository> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding: ItemRepositoryBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_repository, parent, false)
@@ -19,7 +20,7 @@ class RepoListAdapter(private val callback: RepoCallBack) : RecyclerView.Adapter
     }
 
     override fun getItemCount(): Int {
-        return if(::repoList.isInitialized) repoList.size else 0
+        return repoList.size
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

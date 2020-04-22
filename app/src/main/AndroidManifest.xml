@@ -11,14 +11,14 @@
         android:allowBackup="false"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".ui.organizations.OrgListActivity">
+        <activity android:name=".ui.organizations.view.OrgListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.repositories.RepoListActivity" />
+        <activity android:name=".ui.repositories.view.RepoListActivity" />
 
     </application>
 </manifest>

@@ -1,4 +1,4 @@
-package com.chris_guzman.repozest.ui.organizations
+package com.chris_guzman.repozest.ui.organizations.view
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,7 +11,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chris_guzman.repozest.R
 import com.chris_guzman.repozest.databinding.ActivityOrganizationListBinding
-import com.chris_guzman.repozest.ui.repositories.RepoListActivity
+import com.chris_guzman.repozest.ui.organizations.viewmodel.OrgCallBack
+import com.chris_guzman.repozest.ui.organizations.viewmodel.OrgListViewModel
+import com.chris_guzman.repozest.ui.repositories.view.RepoListActivity
 import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding3.widget.afterTextChangeEvents
 import io.reactivex.Observable
@@ -21,13 +23,14 @@ import java.util.concurrent.TimeUnit
 
 
 const val EXTRA_ORG_NAME = "extra_org_name"
-class OrgListActivity: AppCompatActivity(), OrgCallBack {
+class OrgListActivity: AppCompatActivity(),
+    OrgCallBack {
     private lateinit var binding: ActivityOrganizationListBinding
     private lateinit var viewModel: OrgListViewModel
     private lateinit var orgListAdapter: OrgListAdapter
 
     private var errorSnackbar: Snackbar? = null
-    var subscriptions = CompositeDisposable()
+    private var subscriptions = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,7 +61,6 @@ class OrgListActivity: AppCompatActivity(), OrgCallBack {
             .map { it.editable.toString().trim() }
             .filter { it.isNotEmpty() }
             .distinctUntilChanged()
-            .switchMap { s -> Observable.just(s) }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { viewModel.loadOrgs(it) },

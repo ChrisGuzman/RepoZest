@@ -1,7 +1,7 @@
 import com.chris_guzman.repozest.model.GitHubResponse
 import com.chris_guzman.repozest.model.Organization
 import com.chris_guzman.repozest.ui.BaseListViewModelTest
-import com.chris_guzman.repozest.ui.organizations.OrgListViewModel
+import com.chris_guzman.repozest.ui.organizations.viewmodel.OrgListViewModel
 import io.reactivex.Observable
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
@@ -16,7 +16,8 @@ import org.mockito.Mockito.`when`
 class OrgListViewModelTest: BaseListViewModelTest() {
 
     @InjectMocks
-    var orgListViewModel = OrgListViewModel()
+    var orgListViewModel =
+        OrgListViewModel()
 
     private var testObservable: Observable<GitHubResponse<Organization>>? = null
 

@@ -5,4 +5,5 @@
     <string name="search_organizations">Search organizations</string>
     <string name="org_list_retrieve_error">An error occurred while fetching organizations</string>
     <string name="org_logo_description">Logo image for GitHub Organization</string>
+    <string name="stars_count">%s ✨</string>
 </resources>

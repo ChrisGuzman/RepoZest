@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
         <variable
             name="viewModel"
-            type="com.chris_guzman.repozest.ui.repositories.RepoViewModel" />
+            type="com.chris_guzman.repozest.ui.repositories.viewmodel.RepoViewModel" />
 
         <variable
             name="callback"
-            type="com.chris_guzman.repozest.ui.repositories.RepoCallBack" />
+            type="com.chris_guzman.repozest.ui.repositories.viewmodel.RepoCallBack" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,17 +19,30 @@
         android:paddingTop="@dimen/repository_item_padding"
         android:paddingStart="@dimen/repository_item_padding"
         android:paddingEnd="@dimen/repository_item_padding"
-        android:onClick="@{() -> callback.onClick(viewModel.url)}">
+        android:onClick="@{() -> callback.onClick(viewModel.url)}"
+        >
 
         <TextView
             android:id="@+id/repo_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            app:mutableText="@{viewModel.name}"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@{viewModel.name}"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/stars_count"
             app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/stars_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="@{@string/stars_count(viewModel.stars)}"
+            app:layout_constraintStart_toEndOf="@id/repo_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="1337 ✨"
             />
 
         <TextView
@@ -36,7 +50,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/repository_item_margin"
-            app:mutableText="@{viewModel.description}"
+            android:text="@{viewModel.description}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/repo_title"

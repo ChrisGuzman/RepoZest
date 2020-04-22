@@ -5,12 +5,13 @@
     <data>
         <variable
             name="viewModel"
-            type="com.chris_guzman.repozest.ui.organizations.OrgListViewModel" />
+            type="com.chris_guzman.repozest.ui.organizations.viewmodel.OrgListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
         <ProgressBar
             android:layout_width="wrap_content"

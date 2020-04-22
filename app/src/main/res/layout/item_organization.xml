@@ -6,11 +6,11 @@
     <data>
         <variable
             name="viewModel"
-            type="com.chris_guzman.repozest.ui.organizations.OrgViewModel" />
+            type="com.chris_guzman.repozest.ui.organizations.viewmodel.OrgViewModel" />
         
         <variable
             name="callback"
-            type="com.chris_guzman.repozest.ui.organizations.OrgCallBack" />
+            type="com.chris_guzman.repozest.ui.organizations.viewmodel.OrgCallBack" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -37,7 +37,7 @@
             android:id="@+id/org_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:mutableText="@{viewModel.name}"
+            android:text="@{viewModel.name}"
             app:layout_constraintStart_toEndOf="@+id/org_logo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

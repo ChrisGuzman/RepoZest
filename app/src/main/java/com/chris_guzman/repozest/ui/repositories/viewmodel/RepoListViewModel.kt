@@ -1,4 +1,4 @@
-package com.chris_guzman.repozest.ui.repositories
+package com.chris_guzman.repozest.ui.repositories.viewmodel
 
 import android.view.View
 import com.chris_guzman.repozest.R
@@ -24,8 +24,13 @@ class RepoListViewModel(private val org: String): BaseListViewModel<Repository>(
             ))
     }
 
+    override fun onRetrieveSuccess(gitHubResponse: GitHubResponse<Repository>) {
+        data.value = gitHubResponse.items.take(3)
+    }
+
     override fun onRetrieveError(error: Throwable) {
         super.onRetrieveError(error)
         errorMessage.value = R.string.repo_list_retrieve_error
     }
+
 }

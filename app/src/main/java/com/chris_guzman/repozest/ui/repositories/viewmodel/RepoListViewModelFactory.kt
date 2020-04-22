@@ -1,4 +1,4 @@
-package com.chris_guzman.repozest.ui.repositories
+package com.chris_guzman.repozest.ui.repositories.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

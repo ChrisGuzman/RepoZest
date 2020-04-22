@@ -37,7 +37,7 @@ abstract class BaseListViewModel<T>: BaseViewModel() {
         Log.e("GUZ", "${this.javaClass.name} error", error)
     }
 
-    fun onRetrieveSuccess(gitHubResponse: GitHubResponse<T>) {
+    open fun onRetrieveSuccess(gitHubResponse: GitHubResponse<T>) {
         data.value = gitHubResponse.items
     }
 }

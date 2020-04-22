@@ -1,4 +1,4 @@
-package com.chris_guzman.repozest.ui.repositories
+package com.chris_guzman.repozest.ui.repositories.view
 
 import android.net.Uri
 import android.os.Bundle
@@ -11,10 +11,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chris_guzman.repozest.R
 import com.chris_guzman.repozest.databinding.ActivityRepoListBinding
-import com.chris_guzman.repozest.ui.organizations.EXTRA_ORG_NAME
+import com.chris_guzman.repozest.ui.organizations.view.EXTRA_ORG_NAME
+import com.chris_guzman.repozest.ui.repositories.viewmodel.RepoCallBack
+import com.chris_guzman.repozest.ui.repositories.viewmodel.RepoListViewModel
+import com.chris_guzman.repozest.ui.repositories.viewmodel.RepoListViewModelFactory
 import com.google.android.material.snackbar.Snackbar
 
-class RepoListActivity : AppCompatActivity(), RepoCallBack {
+class RepoListActivity : AppCompatActivity(),
+    RepoCallBack {
     private lateinit var binding: ActivityRepoListBinding
     private lateinit var viewModel: RepoListViewModel
     private lateinit var repoListAdapter: RepoListAdapter
@@ -27,7 +31,9 @@ class RepoListActivity : AppCompatActivity(), RepoCallBack {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_repo_list)
 
-        viewModel = ViewModelProvider(this, RepoListViewModelFactory(orgName)).get(RepoListViewModel::class.java)
+        viewModel = ViewModelProvider(this,
+            RepoListViewModelFactory(orgName)
+        ).get(RepoListViewModel::class.java)
 
         repoListAdapter = RepoListAdapter(this)
 

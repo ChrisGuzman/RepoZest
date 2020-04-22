@@ -3,6 +3,7 @@ package com.chris_guzman.repozest.ui.repositories
 import com.chris_guzman.repozest.model.GitHubResponse
 import com.chris_guzman.repozest.model.Repository
 import com.chris_guzman.repozest.ui.BaseListViewModelTest
+import com.chris_guzman.repozest.ui.repositories.viewmodel.RepoListViewModel
 import io.reactivex.Observable
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
@@ -15,7 +16,8 @@ import org.mockito.Mockito
 @RunWith(JUnit4::class)
 class RepoListViewModelTest: BaseListViewModelTest() {
     @InjectMocks
-    var repoListViewModel = RepoListViewModel("NYTimes")
+    var repoListViewModel =
+        RepoListViewModel("NYTimes")
 
     private var testObservable: Observable<GitHubResponse<Repository>>? = null
 
