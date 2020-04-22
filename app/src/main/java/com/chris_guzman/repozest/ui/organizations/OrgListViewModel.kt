@@ -25,6 +25,7 @@ class OrgListViewModel: BaseListViewModel<Organization>() {
     }
 
     override fun onRetrieveError(error: Throwable) {
+        super.onRetrieveError(error)
         errorMessage.value = R.string.org_list_retrieve_error
     }
 

@@ -25,6 +25,7 @@ class RepoListViewModel(private val org: String): BaseListViewModel<Repository>(
     }
 
     override fun onRetrieveError(error: Throwable) {
+        super.onRetrieveError(error)
         errorMessage.value = R.string.repo_list_retrieve_error
     }
 }
