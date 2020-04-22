@@ -11,10 +11,6 @@ class OrgListViewModel: BaseListViewModel<Organization>() {
 
     val errorClickListener = View.OnClickListener { loadOrgs() }
 
-    init {
-        loadOrgs()
-    }
-
     fun loadOrgs(search: String? = null) {
         subscriptions.add( gitHubApiClient.getOrganizations(search)
             .subscribeOn(Schedulers.io())

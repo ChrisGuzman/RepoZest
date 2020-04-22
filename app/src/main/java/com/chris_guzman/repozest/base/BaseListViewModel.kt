@@ -13,9 +13,6 @@ import io.reactivex.disposables.Disposable
 import javax.inject.Inject
 
 abstract class BaseListViewModel<T>: BaseViewModel() {
-    @Inject
-    lateinit var gitHubApiClient: GitHubApiClient
-
     var subscriptions = CompositeDisposable()
 
     val loadingVisibility: MutableLiveData<Int> = MutableLiveData()

@@ -1,6 +1,7 @@
 package com.chris_guzman.repozest.network
 
 import android.util.Log
+import com.chris_guzman.repozest.injection.component.DaggerApiComponent
 import com.chris_guzman.repozest.model.GitHubResponse
 import com.chris_guzman.repozest.model.Organization
 import com.chris_guzman.repozest.model.Repository
@@ -9,7 +10,14 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class GitHubApiClient @Inject constructor(private val gitHubApi: GitHubApi) {
+class GitHubApiClient {
+
+    @Inject
+    lateinit var gitHubApi: GitHubApi
+
+    init {
+        DaggerApiComponent.create().inject(this)
+    }
 
     fun getRepos(orgName: String): Observable<GitHubResponse<Repository>> {
         return gitHubApi.getRepos("org:$orgName")

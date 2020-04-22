@@ -1,26 +1,15 @@
 package com.chris_guzman.repozest.base
 
 import androidx.lifecycle.ViewModel
-import com.chris_guzman.repozest.injection.NetworkModule
-import com.chris_guzman.repozest.injection.component.DaggerViewModelInjector
-import com.chris_guzman.repozest.injection.component.ViewModelInjector
-import com.chris_guzman.repozest.ui.organizations.OrgListViewModel
-import com.chris_guzman.repozest.ui.repositories.RepoListViewModel
+import com.chris_guzman.repozest.injection.component.DaggerApiComponent
+import com.chris_guzman.repozest.network.GitHubApiClient
+import javax.inject.Inject
 
 abstract class BaseViewModel: ViewModel() {
-    private val injector: ViewModelInjector = DaggerViewModelInjector
-        .builder()
-        .networkModule(NetworkModule())
-        .build()
+    @Inject
+    lateinit var gitHubApiClient: GitHubApiClient
 
     init {
-        inject()
-    }
-
-    private fun inject() {
-        when(this) {
-            is RepoListViewModel -> injector.inject(this)
-            is OrgListViewModel -> injector.inject(this)
-        }
+        DaggerApiComponent.create().inject(this)
     }
 }

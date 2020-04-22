@@ -51,6 +51,8 @@ class OrgListActivity: AppCompatActivity(), OrgCallBack {
             }
         })
 
+        viewModel.loadOrgs()
+
         subscriptions.add( binding.orgSearch.afterTextChangeEvents()
             .debounce(500, TimeUnit.MILLISECONDS)
             .map { it.editable.toString().trim() }
