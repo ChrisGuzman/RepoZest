@@ -9,14 +9,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class GitHubApiClient {
-
-    @Inject
-    lateinit var gitHubApi: GitHubApi
-
-    init {
-        DaggerApiComponent.create().inject(this)
-    }
+class GitHubApiClient @Inject constructor(private val gitHubApi: GitHubApi) {
 
     fun getRepos(orgName: String): Observable<GitHubResponse<Repository>> {
         return gitHubApi.getRepos("org:$orgName")

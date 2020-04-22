@@ -19,12 +19,6 @@ class NetworkModule {
 
     @Provides
     @Reusable
-    internal fun provideGitHubClient(): GitHubApiClient {
-        return GitHubApiClient()
-    }
-
-    @Provides
-    @Reusable
     fun provideRetrofitInterface(): GitHubApi {
         val logging = HttpLoggingInterceptor()
         logging.setLevel(HttpLoggingInterceptor.Level.BODY)
@@ -38,5 +32,11 @@ class NetworkModule {
             .client(httpClient.build())
             .build()
             .create(GitHubApi::class.java)
+    }
+
+    @Provides
+    @Reusable
+    internal fun provideGitHubClient(gitHubApi: GitHubApi): GitHubApiClient {
+        return GitHubApiClient(gitHubApi)
     }
 }
