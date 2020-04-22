@@ -3,8 +3,8 @@ package com.chris_guzman.repozest.ui.repositories.viewmodel
 import android.view.View
 import com.chris_guzman.repozest.R
 import com.chris_guzman.repozest.base.BaseListViewModel
-import com.chris_guzman.repozest.model.Repository
 import com.chris_guzman.repozest.model.GitHubResponse
+import com.chris_guzman.repozest.model.Repository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 

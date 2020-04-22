@@ -16,7 +16,6 @@ import com.chris_guzman.repozest.ui.organizations.viewmodel.OrgListViewModel
 import com.chris_guzman.repozest.ui.repositories.view.RepoListActivity
 import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding3.widget.afterTextChangeEvents
-import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import java.util.concurrent.TimeUnit

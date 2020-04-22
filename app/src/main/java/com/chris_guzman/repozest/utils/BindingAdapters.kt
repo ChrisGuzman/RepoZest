@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.RecyclerView
 import com.chris_guzman.repozest.R
 import com.chris_guzman.repozest.utils.extension.getParentActivity
 import com.squareup.picasso.Picasso

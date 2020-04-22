@@ -1,16 +1,10 @@
 package com.chris_guzman.repozest.base
 
-import android.telephony.euicc.DownloadableSubscription
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import com.chris_guzman.repozest.model.GitHubResponse
-import com.chris_guzman.repozest.model.Repository
-import com.chris_guzman.repozest.network.GitHubApi
-import com.chris_guzman.repozest.network.GitHubApiClient
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
-import javax.inject.Inject
 
 abstract class BaseListViewModel<T>: BaseViewModel() {
     var subscriptions = CompositeDisposable()

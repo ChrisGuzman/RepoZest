@@ -1,6 +1,5 @@
 package com.chris_guzman.repozest.network
 
-import android.util.Log
 import com.chris_guzman.repozest.injection.component.DaggerApiComponent
 import com.chris_guzman.repozest.model.GitHubResponse
 import com.chris_guzman.repozest.model.Organization
