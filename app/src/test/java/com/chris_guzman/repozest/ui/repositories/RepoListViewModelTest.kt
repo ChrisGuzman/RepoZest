@@ -15,7 +15,7 @@ import org.mockito.Mockito
 @RunWith(JUnit4::class)
 class RepoListViewModelTest: BaseListViewModelTest() {
     @InjectMocks
-    var repoListViewModel = RepoListViewModel()
+    var repoListViewModel = RepoListViewModel("NYTimes")
 
     private var testObservable: Observable<GitHubResponse<Repository>>? = null
 

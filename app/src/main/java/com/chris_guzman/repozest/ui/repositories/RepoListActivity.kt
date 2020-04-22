@@ -27,8 +27,7 @@ class RepoListActivity : AppCompatActivity(), RepoCallBack {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_repo_list)
 
-        viewModel = ViewModelProvider(this).get(RepoListViewModel::class.java)
-        viewModel.orgName = orgName
+        viewModel = ViewModelProvider(this, RepoListViewModelFactory(orgName)).get(RepoListViewModel::class.java)
 
         repoListAdapter = RepoListAdapter(this)
 

@@ -8,13 +8,12 @@ import com.chris_guzman.repozest.model.GitHubResponse
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class RepoListViewModel: BaseListViewModel<Repository>() {
+class RepoListViewModel(private val org: String): BaseListViewModel<Repository>() {
 
-    var orgName: String? = null
     val errorClickListener = View.OnClickListener { loadRepos() }
 
     fun loadRepos() {
-        subscriptions.add( gitHubApiClient.getRepos(orgName!!)
+        subscriptions.add( gitHubApiClient.getRepos(org)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { onRetrieveStart() }
@@ -26,7 +25,6 @@ class RepoListViewModel: BaseListViewModel<Repository>() {
     }
 
     override fun onRetrieveError(error: Throwable) {
-        super.onRetrieveError(error)
         errorMessage.value = R.string.repo_list_retrieve_error
     }
 }
