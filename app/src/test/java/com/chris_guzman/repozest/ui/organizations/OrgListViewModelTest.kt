@@ -23,7 +23,7 @@ class OrgListViewModelTest: BaseListViewModelTest() {
 
     @Test
     fun `when viewmodel calls loadOrgs then list of organizations is returned`() {
-        val org = Organization(id = 42, login = "NYTimes", avatar_url = "foo.bar", repos_url = "fizz.buzz")
+        val org = Organization(id = 42, login = "Github", avatar_url = "foo.bar", repos_url = "fizz.buzz")
         val orgList = listOf(org)
         val response = GitHubResponse(42, orgList)
 
